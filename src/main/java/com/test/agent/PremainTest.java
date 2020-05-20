@@ -1,4 +1,4 @@
-package test.agent;
+package com.test.agent;
 
 import java.lang.instrument.Instrumentation;
 

@@ -1,4 +1,4 @@
-package test.singleton;
+package com.test.singleton;
 
 public enum EnumSingleton {
     INSTABCE;

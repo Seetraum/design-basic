@@ -1,4 +1,4 @@
-package test;
+package com.test;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

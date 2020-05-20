@@ -1,6 +1,7 @@
-package test.lambda;
+package com.test.lambda;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -11,5 +12,6 @@ public class ArrayInit {
         System.out.println(Arrays.toString(arr));
         var list = IntStream.range(1,10).boxed().collect(Collectors.toList());
         System.out.println(Arrays.toString(list.toArray()));
+        System.out.println(List.of(8));
     }
 }

@@ -1,4 +1,4 @@
-package test.singleton;
+package com.test.singleton;
 
 public class LazyInnerClassSingleton {
     //默认先初始化内部类

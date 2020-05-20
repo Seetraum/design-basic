@@ -1,4 +1,4 @@
-package test.file;
+package com.test.file;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class FileRead {
     public static void main(String[] args) {
-        new FileRead().fileRead("D:/project/test/account.csv");
+        new FileRead().fileRead("D:/project/com.test/account.csv");
     }
 
     private void fileRead(String path) {

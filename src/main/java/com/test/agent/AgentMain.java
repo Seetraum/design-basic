@@ -1,4 +1,4 @@
-package test.agent;
+package com.test.agent;
 
 public class AgentMain {
     public static void main(String[] args) {
