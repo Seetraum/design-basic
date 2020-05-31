@@ -8,7 +8,12 @@ import org.reflections.Reflections;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class BeanFactory implements ExaminerProvider {
+
+    private static final Logger logger = LoggerFactory.getLogger(BeanFactory.class);
     /**
      *对象容器
      * */
@@ -16,7 +21,7 @@ public class BeanFactory implements ExaminerProvider {
     private static final Map<String,Object> beanContainer = new HashMap<>();
 
     /**
-     * 初始化指定包下的所有@Service注解标记的类
+     * 初始化指定包下的所有@Handle注解标记的类
      *
      * @param packageNames 初始化包路径集合
      * @throws InstantiationException
@@ -26,10 +31,12 @@ public class BeanFactory implements ExaminerProvider {
         if (packageNames == null && packageNames.length <= 0){
             return;
         }
+        logger.info("Scan packages = {}",packageNames);
         for (String packageName : packageNames) {
             Reflections reflections = new Reflections(packageName);
             Set<Class<?>> classSet = reflections.getTypesAnnotatedWith(Handle.class);
             classSet.parallelStream().forEach(c -> {
+                logger.info("Scan class = {}",c);
                 try {
                     Object bean = c.getDeclaredConstructor().newInstance();
                     Handle handle = c.getAnnotation(Handle.class);
@@ -78,14 +85,17 @@ public class BeanFactory implements ExaminerProvider {
         }
         Map<String,Event> eventMap = new HashMap<>();
         for (String condition : conditions){
-            Event Event = eventMap.get(condition);
-            if (Event == null) {
-                System.out.println(beanClassContainer.get(condition));
-                Class c = beanClassContainer.get(condition);
-                if (c != null) {
-                    Event = (Event) c.getDeclaredConstructor().newInstance();
+            Event event = eventMap.get(condition);
+            if (event == null) {
+                Class c =beanClassContainer.get(condition);
+                logger.info("Get classes is = {}",c);
+                Object o = beanContainer.get(condition);
+                if (c != null && o != null) {
+                    if (o instanceof Event){
+                        event = (Event) c.getDeclaredConstructor().newInstance();
+                        eventMap.put(condition, event);
+                    }
                 }
-                eventMap.put(condition, Event);
             }
         }
         return eventMap;

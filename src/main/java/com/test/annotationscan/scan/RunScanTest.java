@@ -13,8 +13,9 @@ public class RunScanTest {
         String result = factory.getBean("Service", ServiceDemo.class).execute("Get name excute end");
         System.out.println(result);
 
-        var arr = new String[]{"demo1","demo2","demo3","demo4"};
+        var arr = new String[]{"demo1","demo2","demo3","demo4","Service"};
         factory.examinerChain(arr).forEach((k,v) -> {
+            System.out.println(k);
             v.run();
         });
     }
