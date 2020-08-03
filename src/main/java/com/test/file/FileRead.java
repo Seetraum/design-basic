@@ -7,10 +7,11 @@ import java.util.Arrays;
 
 public class FileRead {
     public static void main(String[] args) {
-        new FileRead().fileRead("D:/project/com.test/account.csv");
+        //fileRead("D:/project/com.test/account.csv");
+        System.out.println(Path.of("D:","test","dev","start").toString());
     }
 
-    private void fileRead(String path) {
+    private static void fileRead(String path) {
         try {
             Files.readAllLines(Path.of(path)).stream()
                     .map(line -> line.split(",")).forEach(arr -> {
