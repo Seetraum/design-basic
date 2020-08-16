@@ -21,7 +21,8 @@ public class ChangeAccountProject {
       var userInfo = line.split(",");
       var user = userInfo[0];
       var password = userInfo[1];
-      OSClientV3 accountClient = OSFactory.builderV3().endpoint("https://iam.myhuaweicloud.com/v3")
+      LOG.info("account info username = {} .... passwd = {}",user,password);
+      /*OSClientV3 accountClient = OSFactory.builderV3().endpoint("https://iam.myhuaweicloud.com/v3")
           .credentials(user, password, Identifier.byName(user))
           .scopeToDomain(Identifier.byName(user)).authenticate();
 
@@ -37,7 +38,9 @@ public class ChangeAccountProject {
         sql(user,project.getId());
       } catch (Exception e) {
         LOG.warn("创建project出错，account:{}", accountClient.getToken().getDomain().getName());
-      }
+      }*/
+      String projectid = TokenUtils.projectId(user,password);
+      sql(user,projectid);
     });
     sqls.forEach(s -> System.out.println(s));
   }
