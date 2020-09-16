@@ -19,8 +19,10 @@ public class SwitchTest {
         switch (day){
             case FRI:
                 System.out.println("1111");
+                break;
             case MON:
                 System.out.println("2222");
+                break;
         }
     }
     //定义枚举
