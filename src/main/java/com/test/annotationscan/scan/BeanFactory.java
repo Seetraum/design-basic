@@ -87,7 +87,7 @@ public class BeanFactory implements ExaminerProvider {
         for (String condition : conditions){
             Event event = eventMap.get(condition);
             if (event == null) {
-                Class c =beanClassContainer.get(condition);
+                Class c = beanClassContainer.get(condition);
                 logger.info("Get classes is = {}",c);
                 Object o = beanContainer.get(condition);
                 if (c != null && o != null) {
