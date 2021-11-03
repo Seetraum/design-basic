@@ -2,13 +2,12 @@ package com.test.lambda;
 
 import static java.util.stream.Collectors.*;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
 public class GroupBy {
-  private static List<Person> personList;
+  private static List<Person> personList = new ArrayList<>();
 
   static {
     personList.add(new Person("小张",10));
@@ -46,12 +45,30 @@ public class GroupBy {
     public void setAge(int age) {
       this.age = age;
     }
+
+    @Override
+    public String toString() {
+      return "Person{" +
+              "name='" + name + '\'' +
+              ", age=" + age +
+              '}';
+    }
   }
 
   public static void main(String[] args) {
-    personList.stream().collect(groupingBy(Person::getName, counting()));
+    personList.stream().collect(groupingBy(Person::getName, counting()))
+            .entrySet().stream()
+            .map(Map.Entry::getValue)
+            .sorted(Comparator.comparing(Long::intValue).reversed())
+            .collect(Collectors.toList());
+    personList.stream().collect(groupingBy(Person::getName, counting())).forEach((k,v) -> {
+      System.out.println(k + "...." + v);
+    });
+    System.out.println("---------------------------------------------------------");
     Comparator<Person> ageHight = Comparator.comparingInt(Person::getAge);
-    personList.stream().collect(groupingBy(Person::getName, reducing(BinaryOperator.maxBy(ageHight))));
+    personList.stream().collect(groupingBy(Person::getName, reducing(BinaryOperator.minBy(ageHight)))).forEach((k,v) -> {
+      System.out.println(k + "...." + v.get());
+    });;
     personList.stream().collect(groupingBy(Person::getName, summarizingInt(Person::getAge)));
     personList.stream().collect(groupingBy(Person::getName, mapping(Person::getAge,toList())));
   }
