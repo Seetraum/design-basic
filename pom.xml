@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <!-- 配置版本常量 -->
     <properties>
-        <jdk.version>14</jdk.version>
+        <jdk.version>17</jdk.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -149,9 +149,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
+                    <source>17</source>
+                    <target>17</target>
                     <encoding>UTF-8</encoding>
+                    <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
             </plugin>
         </plugins>

@@ -9,9 +9,12 @@ import org.springframework.util.StringUtils;
 public class FileRead {
     public static void main(String[] args) {
         //fileRead("D:/project/com.test/account.csv");
-        System.out.println(Path.of("D:","test","dev","start").toString());
-        Object o = null;
-        System.out.println(StringUtils.isEmpty(String.valueOf(o)));
+//        System.out.println(Path.of("D:","test","dev","start").toString());
+//        Object o = null;
+//        System.out.println(StringUtils.isEmpty(String.valueOf(o)));
+        range r = new range(1,"zhang");
+        System.out.println(String.format("%s,%s",r.i,r.name));
+
     }
 
     private static void fileRead(String path) {
@@ -24,4 +27,6 @@ public class FileRead {
             e.printStackTrace();
         }
     }
+
+    public record range(int i,String name){}
 }
